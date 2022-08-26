@@ -18,8 +18,10 @@ app.get("/productos",(req,res)=>{
     res.send(cont.getAll())
 })
 
-
-
+app.get("/productoRandom",(req,res)=>{
+    
+    res.send(cont.getRandom())
+})
 
 
 

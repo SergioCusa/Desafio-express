@@ -1,5 +1,5 @@
 
-const { table } = require("console")
+
 const fs = require ("fs")
 
 module.exports = class Contenedor {
@@ -73,6 +73,15 @@ async deleteById(id){
             console.log("No se pudo vaciar el archivo")
         }
       
+  }
+
+   getRandom(){
+    const data = fs.readFileSync(`${this.archivo}`,"utf-8")
+    const parse = JSON.parse(data)
+    const random = parse[Math.floor(Math.random()* parse.length)]
+    console.log(random)
+    return random 
+
   }
 
 }
