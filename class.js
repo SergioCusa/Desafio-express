@@ -2,7 +2,7 @@
 
 const fs = require ("fs")
 
-module.exports = class Contenedor {
+class Contenedor {
     constructor (archivo){
         this.archivo = archivo
     }
@@ -37,15 +37,13 @@ async getById(id){
         }
   
   }
-getAll(){
+   async getAll(){
     try{
-        const data=fs.readFileSync(`${this.archivo}`, "utf-8")
+        const data= await fs.promises.readFile(`${this.archivo}`, "utf-8")
         const objetos = JSON.parse(data)
-        console.log(objetos)
-        return objetos
+        return console.log(objetos)
     }catch(err){
-        console.log("Archivo inexistente")
-        console.log(err)
+        console.log("No se consiguio info")
     }
 
   }
@@ -75,8 +73,8 @@ async deleteById(id){
       
   }
 
-   getRandom(){
-    const data = fs.readFileSync(`${this.archivo}`,"utf-8")
+  getRandom(){
+    const data =  fs.readFileSync(`${this.archivo}`,"utf-8")
     const parse = JSON.parse(data)
     const random = parse[Math.floor(Math.random()* parse.length)]
     console.log(random)
@@ -86,3 +84,4 @@ async deleteById(id){
 
 }
 
+module.exports = Contenedor
