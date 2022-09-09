@@ -31,9 +31,9 @@ async getById(id){
         const objetos = JSON.parse(data)
         const objeto= objetos.find((objeto) => objeto.id== id )
         if (objeto){
-            console.log(objeto)
+            return (objeto)
         }else{
-            console.log("Usuario no encontrado!")
+            throw new Error ("Objeto no encontrado!!")
         }
   
   }
@@ -41,7 +41,7 @@ async getById(id){
     try{
         const data= await fs.promises.readFile(`${this.archivo}`, "utf-8")
         const objetos = JSON.parse(data)
-        return console.log(objetos)
+        return objetos
     }catch(err){
         console.log("No se consiguio info")
     }
