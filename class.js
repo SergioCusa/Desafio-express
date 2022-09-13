@@ -2,6 +2,8 @@
 
 const fs = require ("fs")
 
+
+
 class Contenedor {
     constructor (archivo){
         this.archivo = archivo
@@ -33,7 +35,7 @@ async getById(id){
         if (objeto){
             return (objeto)
         }else{
-            throw new Error ("Objeto no encontrado!!")
+            throw new Error ("Producto no encontrado!!")
         }
   
   }
@@ -81,7 +83,25 @@ async deleteById(id){
     return random 
 
   }
+  updateById(id, objetoNuevo) {
+    const data = fs.readFileSync(this.archivo, "utf-8");
+    let dataParseada = JSON.parse(data);
+    let productoViejo = dataParseada.find((objeto) => objeto.id === id);
+    let mensaje = "Se reemplazo el producto";
+    if (productoViejo === undefined) {
+      throw { msg: "404 Not found" };
+    }
+    let productosFiltrados = dataParseada.filter((objeto) => objeto.id !== id);
+    productoViejo = { id, ...objetoNuevo };
+    productosFiltrados.push(productoViejo);
+    fs.writeFileSync(this.archivo, JSON.stringify(productosFiltrados, null, 2));
+    return mensaje;
+  }
 
+  
 }
+
+
+
 
 module.exports = Contenedor
