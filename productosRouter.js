@@ -1,8 +1,23 @@
 const express = require("express")
 const {Router}= express
 const router = Router()
+const multer = require ("multer")
 const contenedor = require("./class")
 const cont = new contenedor("./productos.json") 
+ 
+// *Multer configurado
+const storage = multer.diskStorage({
+  filename: (req,file,cb)=>{
+    cb(null,file.fieldname)
+  },
+  destination:(req,file,cb)=>{
+    cb(null,"uploads")
+  },
+})
+
+// *Multer ejecutado
+const upload = multer({storage})
+
 
 
 router.get("/", async (req,res)=>{
@@ -28,9 +43,10 @@ router.get("/productoRandom",(req,res)=>{
     res.send(cont.getRandom())
   })
   
-router.post("/", async (req,res)=>{
-    const {title,price,thimbnail}= req.body
-    await cont.save({title,price,thimbnail})
+router.post("/", upload.single("thumbnail") , async (req,res)=>{
+    const {file} = req
+    const {title,price,thumbnail}= req.body
+    await cont.save({title,price,thumbnail})
     res.send({error:false,msg:"Producto cargado"})
     
   })

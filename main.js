@@ -7,7 +7,7 @@ const productosRouter = require ("./productosRouter")
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use("/api/productos",productosRouter)
-
+app.use("/",express.static( __dirname + "/public"))
 
 
 
