@@ -3,14 +3,12 @@ const app = express()
 const productosRouter = require ("./productosRouter")
 
 
+
 //*Middlewares
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use("/api/productos",productosRouter)
 app.use("/",express.static( __dirname + "/public"))
-
-
-
 
 
 
