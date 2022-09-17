@@ -47,7 +47,7 @@ router.post("/", upload.single("thumbnail") , async (req,res)=>{
     const {file} = req
     const {title,price,thumbnail}= req.body
     await cont.save({title,price,thumbnail})
-    res.send({error:false,msg:"Producto cargado"})
+    res.render("main")
     
   })
   
