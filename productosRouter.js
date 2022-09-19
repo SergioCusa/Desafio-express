@@ -23,8 +23,7 @@ const upload = multer({storage})
 router.get("/", async (req,res)=>{
    
     const data = await cont.getAll()
-    console.log(data)
-    res.send(data)
+    res.render("productos")
   })
 
 router.get("/:id",async (req,res)=>{
@@ -47,9 +46,16 @@ router.post("/", upload.single("thumbnail") , async (req,res)=>{
     const {file} = req
     const {title,price,thumbnail}= req.body
     await cont.save({title,price,thumbnail})
-    res.render("main")
+    const data = await cont.getAll()
     
-  })
+    res.render("productos",{
+      data
+    })
+   
+    
+    
+    })
+
   
 router.put("/:id", (req, res) => {
     try {

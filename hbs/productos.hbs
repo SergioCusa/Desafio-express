@@ -1,0 +1,13 @@
+<tbody> 
+    {{#each data}}
+
+    <tr key={{this.id}} >
+        <td> ID: {{this.id}} </td>
+        <td> Producto: {{this.title}} </td>
+        <td> Precio: ${{this.price}} </td>
+        <td> {{this.thumnail}} </td>
+
+    </tr>
+    {{/each}}
+
+</tbody>
