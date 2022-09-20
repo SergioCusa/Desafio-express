@@ -1,4 +1,5 @@
-<form action="/api/productos" method="POST">
+
+<form action="/api/productos" method="POST" >
 
   <div class="form-group ">
     <label style="color:white;" >Nombre del producto</label>
@@ -12,7 +13,7 @@
 
     <div class="form-group ">
     <label style="color:white;" >Url foto del producto</label>
-    <input name="thumbnail" type="file" class="form-control" id="InputFName" placeholder="Ingrese URL de la foto">
+    <input name="thumbnail" type="text" class="form-control" id="InputFName" placeholder="Ingrese URL de la foto">
   </div>
 
     </div>
@@ -26,11 +27,16 @@
 <div class="d-grid gap-2 col-6 mx-auto">
   <button type="submit" class="btn btn-primary ">Agregar</button>
 </div>
+
 <div class="d-grid gap-2 col-6 mx-auto">
-  <button href= {% url "procuctos"}  type="submit" class="btn btn-primary "> productos </button>
-</div>
+  <button>
+   <a class="navbar-brand" href= "api/productos" > Productos </a>
+
+  </button>
+ </div>
+ 
+
   
 </div>
 </form>
-
 

@@ -23,7 +23,9 @@ const upload = multer({storage})
 router.get("/", async (req,res)=>{
    
     const data = await cont.getAll()
-    res.render("productos")
+    res.render("productos",{
+      data
+    })
   })
 
 router.get("/:id",async (req,res)=>{
@@ -47,8 +49,7 @@ router.post("/", upload.single("thumbnail") , async (req,res)=>{
     const {title,price,thumbnail}= req.body
     await cont.save({title,price,thumbnail})
     const data = await cont.getAll()
-    
-    res.render("productos",{
+     res.render("productos",{
       data
     })
    
