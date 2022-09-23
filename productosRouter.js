@@ -23,7 +23,7 @@ const upload = multer({storage})
 router.get("/", async (req,res)=>{
    
     const data = await cont.getAll()
-    res.render("productos",{
+    res.render("form",{
       data
     })
   })
