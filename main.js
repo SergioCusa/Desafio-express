@@ -39,9 +39,17 @@ app.get("/",(req,res)=>{
 
 //*Coneccion Socket
 
-io.on("connection",(socket)=>{
-    console.log(`conectado: ${socket.id}`)
-})
+const Mensajes = []
+
+io.on("connection", (socket) =>{
+    console.log(`conectado:  ${socket.id}`)
+    socket.emit("mensajes",Mensajes)
+    socket.on("new_msg", (data) =>{
+        console.log(data)
+        Mensajes.push(data)
+    io.sockets.emit("mensajes",Mensajes)    
+    } )
+} )
 
 
 
