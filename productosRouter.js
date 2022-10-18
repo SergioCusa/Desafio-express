@@ -1,8 +1,8 @@
-const express = require("express")
-const {Router}= express
+import express from "express"
+import { Router } from "express"
 const router = Router()
-const multer = require ("multer")
-const contenedor = require("./class")
+import multer from "multer"
+import Contenedor from "class.js"
 const cont = new contenedor("./productos.json") 
  
 // *Multer configurado
@@ -79,4 +79,4 @@ router.delete("/:id",(req,res)=>{
   })
 
 
-module.exports = router  
+export default router

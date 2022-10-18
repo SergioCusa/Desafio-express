@@ -1,18 +1,24 @@
-const express = require ("express")
+import express from "express"
 const app = express()
-const productosRouter = require ("./productosRouter")
-const handlebars = require ("express-handlebars")
-const {Server: HTTPServer} = require("http")
-const {Server: SocketServer} = require("socket.io")
+import { Router } from "express"
+const router = Router()
+import handlebars from "express-handlebars"
+import { Server } from "http"
+import { Server as ServerIo }   from "socket.io"
+import path from "path"
+import { fileURLToPath } from "url"
+const filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(filename)
 
-const httpServer = new HTTPServer(app)
-const io = new SocketServer(httpServer)
+
+const httpServer = new Server(app)
+const io = new ServerIo(httpServer)
 
 
 //*Middlewares
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
-app.use("/api/productos",productosRouter)
+app.use("/api/productos",router)
 app.use(express.static("views"))
 
 
