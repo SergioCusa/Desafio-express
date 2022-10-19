@@ -2,8 +2,10 @@ import express from "express"
 import { Router } from "express"
 const router = Router()
 import multer from "multer"
-import Contenedor from "./class.js"
-const cont = new Contenedor("./productos.json") 
+import connection from "./db.js"
+import dbContainer from "./class.js"
+import knex from "knex"
+const cont = new dbContainer(connection,"menu") 
  
 // *Multer configurado
 const storage = multer.diskStorage({
@@ -45,16 +47,20 @@ router.get("/productoRandom",(req,res)=>{
   })
   
 router.post("/", upload.single("thumbnail") , async (req,res)=>{
-    const {title,price,thumbnail}= req.body
-    await cont.save({title,price,thumbnail})
+    const {nombre,precio,url} = req.body
+    cont.save({nombre,precio,url})
     const data = await cont.getAll()
-     res.render("productos",{
-      data
+    res.send(data)
+    // const {title,price,thumbnail}= req.body
+    // await cont.save({title,price,thumbnail})
+    // const data = await cont.getAll()
+    //  res.render("productos",{
+    //   data
     })
    
     
     
-    })
+    
 
   
 router.put("/:id", (req, res) => {
