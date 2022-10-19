@@ -1,10 +1,8 @@
-import express from "express"
 import { Router } from "express"
 const router = Router()
 import multer from "multer"
 import connection from "./db.js"
 import dbContainer from "./class.js"
-import knex from "knex"
 const cont = new dbContainer(connection,"menu") 
  
 // *Multer configurado
@@ -31,8 +29,8 @@ router.get("/", async (req,res)=>{
   })
 
 router.get("/:id",async (req,res)=>{
-    const {id} = req.params
-    try {
+  try {
+      const {id} = req.params
         const data = await cont.getById(id)
         res.send(data)
     }catch(e){
@@ -41,43 +39,33 @@ router.get("/:id",async (req,res)=>{
   
   })
   
-router.get("/productoRandom",(req,res)=>{
-    
-    res.send(cont.getRandom())
-  })
-  
 router.post("/", upload.single("thumbnail") , async (req,res)=>{
-    const {nombre,precio,url} = req.body
-    cont.save({nombre,precio,url})
-    const data = await cont.getAll()
-    res.send(data)
-    // const {title,price,thumbnail}= req.body
-    // await cont.save({title,price,thumbnail})
-    // const data = await cont.getAll()
-    //  res.render("productos",{
-    //   data
-    })
+  try{
+      const {nombre,precio,url} = req.body
+      cont.save({nombre,precio,url})
+      const data = await cont.getAll()
+      res.render("productos",{data})
+  }catch(e){
+      console.log(e)
+     }
+  })
    
-    
-    
-    
-
-  
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
-      const { id } = req.params
-      const prodNuevo = req.body
-      const idInt = parseInt(id)
-      res.send(cont.updateById(idInt, prodNuevo))
+      const {nombre,precio,url} = req.body
+      const {id} = req.params
+      const result = await cont.updateById({nombre,precio,url},id)
+      res.send({result})
     } catch (err) {
       res.status(404).send(err.msg)
     }
   })
   
-router.delete("/:id",(req,res)=>{
+router.delete("/:id", async (req,res)=>{
     try {
         const { id } = req.params
-        res.send(cont.deleteById(parseInt(id)))
+        const result = await cont.deleteById(id)
+        res.send({result})
       } catch (err) {
         res.status(404).send(err.msg)
       }

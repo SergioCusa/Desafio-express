@@ -1,7 +1,5 @@
 import knex from "knex"
 
-import fs from "fs"
-
 
 class dbContainer{
     constructor(config,tabla){
@@ -20,8 +18,36 @@ class dbContainer{
     async getAll(){
         try{
             return await this.knex.select("*").from(this.table)
+            
         }catch(e){
             throw new ERROR(e)
+        
+        }
+    }
+
+    async updateById(objeto,id){
+        try{
+            return await this.knex.from(this.table).where("id",id).update(objeto)
+            
+        }catch(e){
+            console.log(e)
+        }
+
+    }
+
+    async getById (id){
+        try{
+            return await this.knex.from(this.table).where({id})
+        }catch(e){
+            console.log(e)
+        }
+    }
+
+    async deleteById (id){
+        try{
+            return await this.knex.from(this.table).where({id}).del()
+        }catch(e){
+            console.log(e)
         }
     }
 
