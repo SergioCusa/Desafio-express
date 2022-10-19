@@ -1,7 +1,6 @@
 import express from "express"
 const app = express()
-import { Router } from "express"
-const router = Router()
+import router from "./productosRouter.js"
 import handlebars from "express-handlebars"
 import { Server } from "http"
 import { Server as ServerIo }   from "socket.io"

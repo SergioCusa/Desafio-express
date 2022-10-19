@@ -2,8 +2,8 @@ import express from "express"
 import { Router } from "express"
 const router = Router()
 import multer from "multer"
-import Contenedor from "class.js"
-const cont = new contenedor("./productos.json") 
+import Contenedor from "./class.js"
+const cont = new Contenedor("./productos.json") 
  
 // *Multer configurado
 const storage = multer.diskStorage({
@@ -45,7 +45,6 @@ router.get("/productoRandom",(req,res)=>{
   })
   
 router.post("/", upload.single("thumbnail") , async (req,res)=>{
-    const {file} = req
     const {title,price,thumbnail}= req.body
     await cont.save({title,price,thumbnail})
     const data = await cont.getAll()
