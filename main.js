@@ -30,8 +30,8 @@ app.engine(
      extname:"hbs",
      layoutsDir: __dirname + "/views",
      defaultLayout:("index")
-     
-}));
+     }
+));
 
 app.set("views", __dirname + "/views")
 app.set("view engine","hbs")
@@ -53,15 +53,9 @@ io.on("connection", (socket) =>{
         console.log(data)
         Mensajes.push(data)
     io.sockets.emit("mensajes",Mensajes)    
-    } )
-} )
+    })
+})
 
-
-
-
-// const server = app.listen(8080,()=>{
-//     console.log("Servidor iniciado")
-// })
 
 httpServer.listen(8080,()=>{
     console.log("iniciado socket")

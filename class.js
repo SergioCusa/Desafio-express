@@ -20,7 +20,7 @@ class dbContainer{
             return await this.knex.select("*").from(this.table)
             
         }catch(e){
-            throw new ERROR(e)
+            console.log(e)
         
         }
     }
