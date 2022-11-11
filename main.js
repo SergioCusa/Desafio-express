@@ -9,6 +9,8 @@ import { fileURLToPath } from "url"
 const filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(filename)
 
+// declaracion de constantes
+
 
 const httpServer = new Server(app)
 const io = new ServerIo(httpServer)
