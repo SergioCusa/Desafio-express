@@ -8,6 +8,7 @@ import path from "path"
 import { fileURLToPath } from "url"
 const filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(filename)
+import prodFaker from "./fakerRouter.js"
 
 // declaracion de constantes
 
@@ -20,6 +21,7 @@ const io = new ServerIo(httpServer)
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use("/api/productos",router)
+app.use("/api/productos-test",prodFaker)
 app.use(express.static("views"))
 
 
